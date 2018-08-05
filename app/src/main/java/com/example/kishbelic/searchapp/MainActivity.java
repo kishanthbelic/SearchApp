@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onTick(long l) {
 
-                        Log.i("logman",""+l);
+                        //Log.i("logman",""+l);
 
                     }
 

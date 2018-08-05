@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class SearchActivity extends AppCompatActivity {
@@ -37,38 +38,38 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
 
     public void searchClick(View view) {
 
-        usersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        String queryText = search_txt.getText().toString();
+        Query query = usersRef.orderByChild("Name")
+                .startAt(queryText)
+                .endAt(queryText+"\uf8ff");
 
-                for (DataSnapshot child:dataSnapshot.getChildren()){
-                    String name = child.child("Name").getValue().toString();
-
-                    if (search_txt.getText().equals(name) ||(search_txt.getText().toString() == name)){
-
-                        Log.i("logman values","correct man");
-                    }
+    query.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                    Log.i("logman values",child.getValue()+"");
-                }
+        for (DataSnapshot child:dataSnapshot.getChildren()){
+
+            Log.i("logman query values",child.getValue()+"");
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+        Log.i("logman Error","error man");
+
+    }
+});
 
 
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                Log.i("logman Error", databaseError.toException()+"");
-            }
-        });
 
 
     }

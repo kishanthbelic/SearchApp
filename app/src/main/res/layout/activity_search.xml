@@ -28,15 +28,12 @@
         android:background="@android:drawable/ic_search_category_default"
         android:onClick="searchClick" />
 
-    <view
-        android:id="@+id/recyclerView"
-        class="android.support.v7.app.AlertController$RecycleListView"
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="431dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp">
-
-    </view>
+        android:layout_alignStart="@+id/search_txt"
+        android:layout_marginTop="77dp" />
 
 </RelativeLayout>
